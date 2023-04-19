@@ -41,9 +41,10 @@ ChartJS.register(
 
 export default function Table() {
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState(null);
   const handleClose = () => setOpen(false);
-  const handleOpen = (id) => {
-    //console.log(id)
+  const handleOpen = (row) => {
+    setName(row.Name);
     setOpen(true);
   };
 
@@ -80,7 +81,7 @@ export default function Table() {
       },
       title: {
         display: true,
-        text: "Prediction Chart",
+        text: `${name}`,
         font: {
           size: 25,
           family: "Poppins, sans-serif",
@@ -114,6 +115,14 @@ export default function Table() {
   return (
     <div style={{ height: "100vh", width: "100%", position: "relative" }}>
       <DataGrid
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 15,
+            },
+          },
+        }}
+        pageSizeOptions={[5, 15, 20]}
         rows={data.map((item) => {
           return { id: item.id, Name: item.name, price: item.price };
         })}
@@ -132,7 +141,7 @@ export default function Table() {
                     backgroundColor: "#acacac3d",
                     padding: "7px",
                   }}
-                  onClick={() => handleOpen(params.id)}
+                  onClick={() => handleOpen(params.row)}
                 >
                   Predict
                 </Button>
