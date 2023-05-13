@@ -1,0 +1,11 @@
+.chart{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  width: 800px;
+  border: 2px solid #00000068;
+  box-shadow: 24;
+  padding: 40px;
+}
